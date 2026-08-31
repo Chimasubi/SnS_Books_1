@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import type { BookWithAuthor } from '@/types';
 import { CoverArt } from '@/components/CoverArt';
 import { ProgressBar } from '@/components/ui';
+import { Reveal } from '@/components/Reveal';
 import { IconArrowRight, IconCheck } from '@/components/icons';
 import { formatMoney } from '@/lib/format';
 
@@ -82,10 +83,14 @@ export function BookGrid({ books, ownedIds, progressOf }: {
 }) {
   return (
     <div className="book-grid">
-      {books.map((book) => {
+      {books.map((book, i) => {
         const owned = ownedIds?.has(book.id) ?? false;
         const progress = progressOf ? progressOf(book.id) : undefined;
-        return <BookCard key={book.id} book={book} owned={owned} progress={progress} />;
+        return (
+          <Reveal key={book.id} delay={Math.min(i, 5) * 70}>
+            <BookCard book={book} owned={owned} progress={progress} />
+          </Reveal>
+        );
       })}
     </div>
   );

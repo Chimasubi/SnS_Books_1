@@ -1626,3 +1626,237 @@
 .about-feature p {
   font-size: var(--fs-sm);
 }
+
+/* ------------------------------------------------------------------ */
+/* Motion + polish pass                                                */
+/* ------------------------------------------------------------------ */
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero entrance */
+.hero-line {
+  animation: rise-in 0.8s var(--ease-out) both;
+}
+
+.hero-line:nth-child(1) { animation-delay: 0.12s; }
+.hero-line:nth-child(2) { animation-delay: 0.22s; }
+.hero-line:nth-child(3) { animation-delay: 0.32s; }
+
+.hero-kicker {
+  animation: rise-in 0.7s var(--ease-out) both;
+  animation-delay: 0.05s;
+}
+
+.hero-sub {
+  animation: rise-in 0.7s var(--ease-out) both;
+  animation-delay: 0.4s;
+}
+
+.hero-ctas {
+  animation: rise-in 0.7s var(--ease-out) both;
+  animation-delay: 0.52s;
+}
+
+.hero-note {
+  animation: rise-in 0.6s var(--ease-out) both;
+  animation-delay: 0.62s;
+}
+
+.hero-visual {
+  animation: rise-in 0.9s var(--ease-out) both;
+  animation-delay: 0.3s;
+}
+
+/* Second drifting aura */
+.hero-aura::after {
+  content: '';
+  position: absolute;
+  left: -40%;
+  bottom: -55%;
+  width: 85%;
+  height: 85%;
+  background: radial-gradient(circle, rgba(255, 125, 36, 0.13), transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  animation: aura-drift 16s var(--ease-in-out) infinite alternate-reverse;
+}
+
+/* Stripes */
+.stripe {
+  transition: border-color var(--duration-normal) var(--ease-out);
+}
+
+.stripe:hover {
+  border-top-color: rgba(255, 106, 0, 0.55);
+}
+
+/* Quote mark */
+@keyframes quote-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+.quote-block-mark {
+  animation: quote-pulse 3.4s var(--ease-in-out) infinite;
+}
+
+/* CTA banner — rotating conic accent */
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  inset: -60%;
+  z-index: 0;
+  background: conic-gradient(from 100deg, transparent 0 76%, rgba(255, 106, 0, 0.3) 86%, rgba(255, 176, 112, 0.16) 92%, transparent 100%);
+  animation: spin-slow 9s linear infinite;
+  pointer-events: none;
+}
+
+.cta-banner > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Filter buttons */
+.filter-btn {
+  transition: color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.filter-btn:hover {
+  transform: translateY(-1px);
+}
+
+.filter-btn:active {
+  transform: scale(0.96);
+}
+
+/* Chapter rows */
+.chapter-row {
+  transition: background var(--duration-fast) var(--ease-out),
+    padding-left var(--duration-normal) var(--ease-out);
+}
+
+.chapter-row:hover {
+  padding-left: calc(var(--space-5) + 6px);
+}
+
+/* Author stats & timeline */
+.author-stat {
+  transition: transform var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.author-stat:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 106, 0, 0.35);
+  box-shadow: 0 14px 36px -16px rgba(255, 106, 0, 0.28);
+}
+
+@keyframes dot-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 106, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(255, 106, 0, 0);
+  }
+}
+
+.timeline-item::before {
+  animation: dot-pulse 3.2s var(--ease-in-out) infinite;
+}
+
+/* About feature cards */
+.about-feature {
+  transition: transform var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.about-feature:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 18px 44px -20px rgba(0, 0, 0, 0.7);
+}
+
+/* Book detail cover */
+@keyframes cover-float {
+  from {
+    transform: translateY(-4px) rotate(-0.6deg);
+  }
+  to {
+    transform: translateY(4px) rotate(0.6deg);
+  }
+}
+
+.book-detail-cover .cover {
+  animation: cover-float 9s var(--ease-in-out) infinite alternate;
+}
+
+/* Success mark ring */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(47, 191, 113, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(47, 191, 113, 0);
+  }
+}
+
+.success-mark {
+  animation: pop-in var(--duration-slow) var(--ease-out),
+    glow-pulse 2.6s var(--ease-in-out) 0.6s infinite;
+}
+
+/* Reader theme transition + chapter entrance */
+.reader {
+  transition: background-color var(--duration-slow) var(--ease-out),
+    color var(--duration-slow) var(--ease-out);
+}
+
+.reader-top,
+.reader-bottom {
+  transition: background-color var(--duration-slow) var(--ease-out),
+    border-color var(--duration-slow) var(--ease-out);
+}
+
+.reader-chapter-label,
+.reader-chapter-title {
+  animation: rise-in 0.6s var(--ease-out) both;
+}
+
+.reader-chapter-label {
+  animation-delay: 0.05s;
+}
+
+.reader-chapter-title {
+  animation-delay: 0.12s;
+}
+
+.reader-progress-fill {
+  transition: width 0.3s var(--ease-out);
+}

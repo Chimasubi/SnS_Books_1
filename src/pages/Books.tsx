@@ -4,6 +4,7 @@ import type { BookStatus, BookWithAuthor } from '@/types';
 import { listBooks } from '@/services/books.service';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { BookGrid } from '@/components/BookCard';
+import { Reveal } from '@/components/Reveal';
 import { SkeletonBookGrid, EmptyState, Button } from '@/components/ui';
 
 type Filter = 'all' | 'published' | 'coming_soon';
@@ -66,15 +67,18 @@ export function Books() {
   return (
     <div className="container">
       <section className="section" style={{ paddingTop: 'var(--space-7)' }}>
-        <p className="eyebrow">The Collection</p>
-        <h1 className="page-title mt-2">BOOKS</h1>
-        <p className="page-sub">
-          Five books. One remarkable journey. Explore the launch collection of
-          Fredrick Bundala, published by SNS Books.
-        </p>
+        <Reveal>
+          <p className="eyebrow">The Collection</p>
+          <h1 className="page-title mt-2">BOOKS</h1>
+          <p className="page-sub">
+            Five books. One remarkable journey. Explore the launch collection of
+            Fredrick Bundala, published by SNS Books.
+          </p>
+        </Reveal>
       </section>
 
-      <div className="toolbar">
+      <Reveal delay={80}>
+        <div className="toolbar">
         <div className="toolbar-filters" role="group" aria-label="Filter books">
           {FILTERS.map((f) => (
             <button
@@ -102,7 +106,8 @@ export function Books() {
             <option value="price-desc">Price: high to low</option>
           </select>
         </div>
-      </div>
+        </div>
+      </Reveal>
 
       {!visible ? (
         <SkeletonBookGrid />

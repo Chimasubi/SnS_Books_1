@@ -18,6 +18,13 @@
   background: var(--sns-elevated);
   border: 1px solid var(--sns-border);
   color: var(--sns-orange);
+  transition: border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.logo:hover .logo-mark {
+  border-color: rgba(255, 106, 0, 0.5);
+  box-shadow: 0 0 26px -6px var(--sns-orange-glow);
 }
 
 .logo-sm .logo-mark {
@@ -70,7 +77,12 @@
   border-bottom: 1px solid transparent;
   transition: background var(--duration-normal) var(--ease-out),
     border-color var(--duration-normal) var(--ease-out),
-    box-shadow var(--duration-normal) var(--ease-out);
+    box-shadow var(--duration-normal) var(--ease-out),
+    transform var(--duration-normal) var(--ease-out);
+}
+
+.nav-hidden {
+  transform: translateY(-100%);
 }
 
 .nav-scrolled {
@@ -112,7 +124,7 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
-.nav-link-active::after {
+.nav-link::after {
   content: '';
   position: absolute;
   left: var(--space-4);
@@ -121,6 +133,14 @@
   height: 2px;
   border-radius: 2px;
   background: var(--sns-orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.nav-link-active::after,
+.nav-link:hover::after {
+  transform: scaleX(1);
 }
 
 .nav-actions {
@@ -306,6 +326,20 @@
   padding-top: var(--space-4);
 }
 
+.drawer-open .drawer-nav > * {
+  animation: rise-in 0.5s var(--ease-out) both;
+}
+
+.drawer-open .drawer-nav > *:nth-child(1) { animation-delay: 0.08s; }
+.drawer-open .drawer-nav > *:nth-child(2) { animation-delay: 0.14s; }
+.drawer-open .drawer-nav > *:nth-child(3) { animation-delay: 0.2s; }
+.drawer-open .drawer-nav > *:nth-child(4) { animation-delay: 0.26s; }
+.drawer-open .drawer-nav > *:nth-child(5) { animation-delay: 0.32s; }
+
+.drawer-open .drawer-foot > * {
+  animation: rise-in 0.5s var(--ease-out) 0.24s both;
+}
+
 .drawer-tagline {
   margin-top: var(--space-4);
   font-size: var(--fs-xs);
@@ -344,6 +378,7 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-3);
+  animation: modal-in var(--duration-normal) var(--ease-out);
 }
 
 .search-input-row {
@@ -522,11 +557,12 @@
 
 .book-card .cover {
   transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out);
+  will-change: transform;
 }
 
 .book-card:hover .cover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-3), 0 0 0 1px rgba(255, 106, 0, 0.14);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-3), 0 18px 52px -20px var(--sns-orange-glow), 0 0 0 1px rgba(255, 106, 0, 0.18);
 }
 
 .book-card-demo {

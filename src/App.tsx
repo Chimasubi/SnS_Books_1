@@ -41,10 +41,11 @@ import { AdminAnalytics } from '@/admin/AnalyticsAdmin';
 import { AdminSettings } from '@/admin/SettingsAdmin';
 
 function PublicShell({ children }: { children: React.ReactNode }) {
+  const { pathname } = useLocation();
   return (
     <>
       <Navbar />
-      <main className="page">{children}</main>
+      <main className="page" key={pathname}>{children}</main>
       <Footer />
     </>
   );

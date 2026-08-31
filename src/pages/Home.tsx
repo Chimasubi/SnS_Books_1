@@ -6,9 +6,20 @@ import { useAuth } from '@/context/AuthContext';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { BookGrid } from '@/components/BookCard';
 import { CoverArt } from '@/components/CoverArt';
+import { Reveal } from '@/components/Reveal';
 import { SkeletonBookGrid, EmptyState } from '@/components/ui';
 import { IconArrowRight, IconBookOpen } from '@/components/icons';
 import { AUTHOR_NAME, AUTHOR_ALIAS } from '@/config/site';
+
+const MARQUEE_ITEMS = [
+  'SNS Books',
+  'Stories',
+  'Lives',
+  'Legacies',
+  'Simulizi na Sauti',
+  'Read Anywhere',
+  'Structured Reading',
+];
 
 export function Home() {
   usePageMeta({
@@ -38,7 +49,7 @@ export function Home() {
             <h1>
               <span className="hero-line">STORIES.</span>
               <span className="hero-line">LIVES.</span>
-              <span className="hero-line orange">LEGACIES.</span>
+              <span className="hero-line text-gradient">LEGACIES.</span>
             </h1>
             <p className="hero-sub">
               Discover the books, experiences and ideas of {AUTHOR_NAME}, {AUTHOR_ALIAS}.
@@ -59,9 +70,20 @@ export function Home() {
         </div>
       </section>
 
+      <div className="marquee" aria-hidden="true">
+        <div className="marquee-track">
+          {[0, 1].map((half) => (
+            <span key={half} className="marquee-item">
+              {MARQUEE_ITEMS.join(' ') + ' '}
+            </span>
+          ))}
+        </div>
+      </div>
+
       <section className="section">
         <div className="container">
-          <div className="stripes">
+          <Reveal>
+            <div className="stripes">
             <div className="stripe">
               <span className="stripe-num">05</span>
               <span className="stripe-label">Books in the launch collection</span>
@@ -78,22 +100,25 @@ export function Home() {
               <span className="stripe-num">TZS · USD · EUR · GBP</span>
               <span className="stripe-label">Read anywhere, pay the way you like</span>
             </div>
-          </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="section">
         <div className="container">
-          <div className="section-head">
-            <div>
-              <p className="eyebrow">The Collection</p>
-              <h2 className="mt-2">THE COLLECTION</h2>
-              <p className="collection-note mt-3">Five books. One remarkable journey.</p>
+          <Reveal>
+            <div className="section-head">
+              <div>
+                <p className="eyebrow">The Collection</p>
+                <h2 className="mt-2">THE COLLECTION</h2>
+                <p className="collection-note mt-3">Five books. One remarkable journey.</p>
+              </div>
+              <Link to="/books" className="btn btn-ghost">
+                View All <IconArrowRight size={16} />
+              </Link>
             </div>
-            <Link to="/books" className="btn btn-ghost">
-              View All <IconArrowRight size={16} />
-            </Link>
-          </div>
+          </Reveal>
 
           {loading ? (
             <SkeletonBookGrid />
@@ -110,49 +135,56 @@ export function Home() {
 
       <section className="section">
         <div className="container">
-          <blockquote className="quote-block">
-            <span className="quote-block-mark" aria-hidden="true">“</span>
-            <p className="quote-block-text">
-              A premium digital home for stories, books, experiences and legacies.
-            </p>
-            <p className="quote-block-credit">SNS BOOKS</p>
-          </blockquote>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <div className="cta-banner">
-            <div>
-              <h2>Start with a free chapter.</h2>
-              <p>
-                Every SNS book opens with a free sample chapter. If you love the story,
-                the complete book joins your library in one step.
+          <Reveal>
+            <blockquote className="quote-block">
+              <span className="quote-block-mark" aria-hidden="true">“</span>
+              <p className="quote-block-text">
+                A premium digital home for stories, books, experiences and legacies.
               </p>
-            </div>
-            <div className="row">
-              <Link to="/library" className="btn btn-primary">
-                <IconBookOpen size={16} /> {user ? 'Open My Library' : 'Sign In to Library'}
-              </Link>
-              <Link to="/books" className="btn btn-ghost">
-                Browse Books
-              </Link>
-            </div>
-          </div>
+              <p className="quote-block-credit">SNS BOOKS</p>
+            </blockquote>
+          </Reveal>
         </div>
       </section>
 
       <section className="section">
         <div className="container">
-          <div className="section-head">
-            <div>
-              <p className="eyebrow">The Author</p>
-              <h2 className="mt-2">THE MAN BEHIND THE STORIES</h2>
+          <Reveal>
+            <div className="cta-banner">
+              <div>
+                <h2>Start with a free chapter.</h2>
+                <p>
+                  Every SNS book opens with a free sample chapter. If you love the story,
+                  the complete book joins your library in one step.
+                </p>
+              </div>
+              <div className="row">
+                <Link to="/library" className="btn btn-primary">
+                  <IconBookOpen size={16} /> {user ? 'Open My Library' : 'Sign In to Library'}
+                </Link>
+                <Link to="/books" className="btn btn-ghost">
+                  Browse Books
+                </Link>
+              </div>
             </div>
-            <Link to="/author" className="btn btn-ghost">
-              Meet Him <IconArrowRight size={16} />
-            </Link>
-          </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <Reveal>
+            <div className="section-head">
+              <div>
+                <p className="eyebrow">The Author</p>
+                <h2 className="mt-2">THE MAN BEHIND THE STORIES</h2>
+              </div>
+              <Link to="/author" className="btn btn-ghost">
+                Meet Him <IconArrowRight size={16} />
+              </Link>
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
           <div className="cta-banner">
             <div>
               <p className="hero-kicker" style={{ marginBottom: 'var(--space-3)' }}>
@@ -167,6 +199,7 @@ export function Home() {
               His Journey <IconArrowRight size={16} />
             </Link>
           </div>
+          </Reveal>
         </div>
       </section>
     </>
