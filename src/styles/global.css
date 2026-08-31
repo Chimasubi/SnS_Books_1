@@ -9,6 +9,12 @@ html {
 
 body {
   background: transparent;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 /* ------------------------------------------------------------------ */
@@ -17,9 +23,9 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  font-weight: var(--fw-extrabold);
-  letter-spacing: var(--tracking-tight);
-  line-height: var(--lh-tight);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
   color: var(--sns-white);
 }
 
@@ -113,23 +119,14 @@ p {
   transform: translateY(0) scale(0.98);
 }
 
+/* Remove aggressive button shine */
 .btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -60%;
-  width: 45%;
-  z-index: 0;
-  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.28), transparent);
-  transform: skewX(-18deg);
-  transition: left var(--duration-slower) var(--ease-in-out);
-  pointer-events: none;
+  display: none;
+}
+.btn:hover::before {
+  display: none;
 }
 
-.btn:hover::before {
-  left: 130%;
-}
 
 .btn:disabled {
   opacity: 0.5;
