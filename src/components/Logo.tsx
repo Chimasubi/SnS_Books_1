@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { APP_SHORT_NAME } from '@/config/site';
-import { IconBook } from '@/components/icons';
 
 export function Logo({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
   return (
